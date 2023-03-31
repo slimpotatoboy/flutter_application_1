@@ -11,6 +11,9 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController _formData = TextEditingController();
   String textValue = "";
 
+  // this list will contain all the todos
+  List<String> todoList = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,31 +51,41 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    textValue = _formData.text;
+                    // textValue = _formData.text;
+                    todoList.add(_formData.text);
+                    _formData.text = "";
                     print(_formData.text);
                     setState(() {});
                   },
                   child: Text("Add"),
                 ),
-                if (textValue != "")
-                  Container(
-                    margin: const EdgeInsets.only(top: 20.0),
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: 6.0,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(textValue),
-                        Icon(Icons.home),
-                      ],
-                    ),
-                  ),
+                ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: todoList.length,
+                  itemBuilder: (context, index) {
+                    var item = todoList[index];
+                    return Container(
+                      margin: const EdgeInsets.only(top: 20.0),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 10.0,
+                        horizontal: 6.0,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(item),
+                          Icon(Icons.home),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+                // if (textValue != "")
               ],
             ),
           ),
