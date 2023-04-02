@@ -12,7 +12,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String textValue = "";
 
   // this list will contain all the todos
-  List<String> todoList = [];
+  List todoList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 TextButton(
                   onPressed: () {
                     // textValue = _formData.text;
-                    todoList.add(_formData.text);
+                    todoList.add({
+                      "task": _formData.text,
+                      "icon": Icons.task,
+                      "checked": false,
+                    });
                     _formData.text = "";
                     print(_formData.text);
                     setState(() {});
@@ -78,8 +82,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(item),
-                          Icon(Icons.home),
+                          Checkbox(
+                            value: item['checked'],
+                            onChanged: (value) {},
+                          ),
+                          Text(item['task']),
+                          Icon(item['icon']),
                         ],
                       ),
                     );
