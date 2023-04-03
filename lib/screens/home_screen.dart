@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/task_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -84,9 +85,30 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Checkbox(
                             value: item['checked'],
-                            onChanged: (value) {},
+                            onChanged: (value) {
+                              for (var i = 0; i < todoList.length; i++) {
+                                if (todoList[i] == item) {
+                                  // print(todoList[i]);
+                                  setState(() {
+                                    todoList[i]['checked'] =
+                                        !todoList[i]['checked'];
+                                  });
+                                }
+                              }
+                            },
                           ),
-                          Text(item['task']),
+                          GestureDetector(
+                            onTap: () {
+                              print("tap");
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => TaskScreen(),
+                                ),
+                              );
+                            },
+                            child: Text(item['task']),
+                          ),
                           Icon(item['icon']),
                         ],
                       ),
