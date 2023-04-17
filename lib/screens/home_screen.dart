@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/task_screen.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -100,12 +101,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           GestureDetector(
                             onTap: () {
                               print("tap");
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => TaskScreen(),
-                                ),
+                              Get.to(
+                                TaskScreen(),
+                                transition: Transition.rightToLeft,
                               );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (_) => TaskScreen(),
+                              //   ),
+                              // );
                             },
                             child: Text(item['task']),
                           ),

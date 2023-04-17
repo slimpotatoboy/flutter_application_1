@@ -6,9 +6,27 @@ class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        elevation: 0,
+        title: Text("Single Screen"),
+        actions: [
+          Icon(Icons.more_horiz),
+          Icon(Icons.home),
+        ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Text("This is single Task"),
+          child: Column(
+            children: [
+              Image.asset(
+                "assets/images/photo.png",
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                fit: BoxFit.cover,
+              ),
+            ],
+          ),
         ),
       ),
     );
